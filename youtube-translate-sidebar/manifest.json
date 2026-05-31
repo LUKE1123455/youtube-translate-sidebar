@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube 翻译侧边栏",
+  "version": "1.0.0",
+  "description": "在YouTube视频右侧添加翻译侧边栏，选中文本即可翻译，支持有道/谷歌翻译",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://translate.googleapis.com/*",
+    "https://api.mymemory.translated.net/*",
+    "https://openapi.youdao.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "YouTube 翻译侧边栏"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

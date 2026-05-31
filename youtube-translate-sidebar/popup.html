@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube 翻译侧边栏</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<div class="popup">
+  <div class="popup-header">
+    <span class="popup-logo">译</span>
+    <span>YouTube 翻译侧边栏</span>
+  </div>
+
+  <div class="popup-body">
+    <!-- Engine -->
+    <div class="form-group">
+      <label class="form-label">翻译引擎</label>
+      <select id="engine" class="form-select">
+        <option value="google">Google 翻译（免费，无需密钥）</option>
+        <option value="mymemory">MyMemory（免费，无需密钥）</option>
+        <option value="youdao">有道翻译（需 API 密钥）</option>
+      </select>
+    </div>
+
+    <!-- Youdao Settings -->
+    <div id="youdao-fields" class="youdao-fields" style="display:none">
+      <div class="form-group">
+        <label class="form-label">App Key</label>
+        <input type="text" id="youdao-app-key" class="form-input" placeholder="输入你的有道 App Key">
+      </div>
+      <div class="form-group">
+        <label class="form-label">App Secret</label>
+        <input type="text" id="youdao-app-secret" class="form-input" placeholder="输入你的有道 App Secret">
+      </div>
+      <div class="form-hint">
+        免费注册：<a href="https://ai.youdao.com/" target="_blank">ai.youdao.com</a>，
+        注册后在"应用管理"中创建应用即可获取密钥。
+      </div>
+    </div>
+
+    <!-- Save -->
+    <button id="btn-save" class="btn-save">保存设置</button>
+    <div id="save-status" class="save-status"></div>
+  </div>
+
+  <div class="popup-footer">
+    <div class="footer-title">使用说明</div>
+    <ul class="footer-list">
+      <li>打开 YouTube 视频页面，翻译侧边栏会自动出现在视频右侧</li>
+      <li>在页面上<strong>选中英文文本</strong>，即可自动弹出翻译</li>
+      <li>在侧边栏输入框中输入单词或句子，按 <strong>Enter</strong> 翻译</li>
+      <li>点击侧边栏顶部的 <strong>◀</strong> 按钮可以收起/展开侧边栏</li>
+      <li>翻译历史会自动保存，点击可重新查看</li>
+    </ul>
+  </div>
+</div>
+<script src="popup.js"></script>
+</body>
+</html>

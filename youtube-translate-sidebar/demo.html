@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Translate Sidebar — by Yang Bowen</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0f0f0f;
+    color: #eee;
+    line-height: 1.6;
+  }
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 80px 20px;
+    text-align: center;
+    border-bottom: 3px solid #e94560;
+  }
+  .hero h1 {
+    font-size: 2.8em;
+    background: linear-gradient(90deg, #e94560, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+  }
+  .hero .tagline {
+    font-size: 1.2em;
+    color: #aaa;
+    max-width: 650px;
+    margin: 0 auto 30px;
+  }
+  .hero .badge {
+    display: inline-block;
+    background: #e94560;
+    color: #fff;
+    padding: 8px 24px;
+    border-radius: 25px;
+    font-size: 0.9em;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 60px 20px; }
+  .section-title {
+    font-size: 1.8em;
+    margin-bottom: 30px;
+    color: #e94560;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+  }
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+  .feature-card {
+    background: #1a1a2e;
+    border-radius: 12px;
+    padding: 30px;
+    border: 1px solid #333;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .feature-card:hover { transform: translateY(-3px); border-color: #e94560; }
+  .feature-card .icon { font-size: 2.5em; margin-bottom: 15px; }
+  .feature-card h3 { font-size: 1.1em; margin-bottom: 10px; color: #fff; }
+  .feature-card p { font-size: 0.9em; color: #999; }
+  .mockup {
+    background: #1a1a2e;
+    border: 2px solid #333;
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 40px 0;
+  }
+  .mockup-bar {
+    background: #2a2a3e;
+    padding: 12px 20px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    border-bottom: 1px solid #333;
+  }
+  .mockup-dot { width: 12px; height: 12px; border-radius: 50%; }
+  .mockup-dot.red { background: #ff5f57; }
+  .mockup-dot.yellow { background: #ffbd2e; }
+  .mockup-dot.green { background: #28ca41; }
+  .mockup-url {
+    background: #0f0f0f;
+    border-radius: 6px;
+    padding: 6px 16px;
+    margin-left: 20px;
+    color: #888;
+    font-size: 0.85em;
+    flex: 1;
+  }
+  .mockup-body { display: flex; min-height: 400px; }
+  .mockup-main {
+    flex: 1;
+    background: #0f0f0f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    font-size: 1.2em;
+  }
+  .mockup-sidebar {
+    width: 340px;
+    background: #1e1e2e;
+    border-left: 2px solid #e94560;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  .mockup-sidebar .sb-title {
+    font-size: 0.85em;
+    color: #e94560;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .mockup-sidebar .trans-item {
+    background: #252540;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    font-size: 0.85em;
+  }
+  .mockup-sidebar .original { color: #aaa; margin-bottom: 5px; }
+  .mockup-sidebar .translated { color: #fff; font-size: 0.95em; }
+  .mockup-sidebar .emoji-tag { font-size: 1.5em; float: right; }
+  .tech-stack { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .tech-tag {
+    background: #252540;
+    color: #e94560;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 0.85em;
+    font-weight: 500;
+  }
+  .cta {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #e94560, #c23152);
+  }
+  .cta h2 { font-size: 2em; margin-bottom: 15px; }
+  .cta p { max-width: 600px; margin: 0 auto 25px; color: rgba(255,255,255,0.85); }
+  .cta a {
+    display: inline-block;
+    background: #fff;
+    color: #e94560;
+    padding: 14px 40px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.05em;
+    transition: transform 0.2s;
+  }
+  .cta a:hover { transform: scale(1.05); }
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: #555;
+    font-size: 0.85em;
+    border-top: 1px solid #222;
+  }
+  footer a { color: #e94560; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>🎬 YouTube Translate Sidebar</h1>
+  <p class="tagline">
+    A Chrome extension that adds a real-time AI translation sidebar to YouTube.
+    Select any text, get instant translations, and practice spoken English —
+    all without leaving the video.
+  </p>
+  <span class="badge">🔧 Chrome Extension · Manifest V3</span>
+</div>
+
+<!-- Browser Mockup -->
+<div class="container">
+  <div class="mockup">
+    <div class="mockup-bar">
+      <span class="mockup-dot red"></span>
+      <span class="mockup-dot yellow"></span>
+      <span class="mockup-dot green"></span>
+      <div class="mockup-url">🔒 youtube.com/watch?v=...</div>
+    </div>
+    <div class="mockup-body">
+      <div class="mockup-main">
+        📺 YouTube Video Playing Here...
+      </div>
+      <div class="mockup-sidebar">
+        <div class="sb-title">🌐 Translate Sidebar</div>
+        <div class="trans-item">
+          <div class="original">"Machine learning is transforming..."</div>
+          <div class="translated">机器学习正在改变... <span class="emoji-tag">🤖</span></div>
+        </div>
+        <div class="trans-item">
+          <div class="original">"The neural network architecture..."</div>
+          <div class="translated">神经网络架构... <span class="emoji-tag">🧠</span></div>
+        </div>
+        <div class="trans-item">
+          <div class="original">"This breakthrough enables..."</div>
+          <div class="translated">这一突破使得... <span class="emoji-tag">🚀</span></div>
+        </div>
+        <div style="text-align:center; margin-top:15px; color:#555; font-size:0.8em;">
+          🎤 Hold Z to speak &nbsp;|&nbsp; Ctrl+Shift+Y to toggle
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Features -->
+<div class="container">
+  <h2 class="section-title">⚡ Features</h2>
+  <div class="features">
+    <div class="feature-card">
+      <div class="icon">🖱️</div>
+      <h3>One-Click Translation</h3>
+      <p>Select any text on YouTube and instantly see the Chinese translation in the sidebar. No more copy-pasting into external tools.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🎤</div>
+      <h3>Spoken Practice Mode</h3>
+      <p>Hold the Z key to record your voice — practice spoken English responses to video content. Built-in microphone capture.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🎨</div>
+      <h3>Smart Word Visualization</h3>
+      <p>500+ English words are auto-matched with emoji illustrations. Learning vocabulary becomes visual, intuitive, and fun.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🤖</div>
+      <h3>AI-Powered Translation</h3>
+      <p>Supports OpenAI GPT and Google Gemini for nuanced, context-aware translations beyond basic dictionary lookups.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🌐</div>
+      <h3>Multi-Engine Support</h3>
+      <p>Switch between Youdao, Google Translate, MyMemory, and AI engines on the fly — choose what works best for you.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">⌨️</div>
+      <h3>Keyboard Shortcuts</h3>
+      <p>Ctrl+Shift+Y toggles the sidebar. Hold Z for mic input. Designed for power users who live on the keyboard.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Tech Stack -->
+<div class="container">
+  <h2 class="section-title">🛠️ Tech Stack</h2>
+  <div class="tech-stack">
+    <span class="tech-tag">Chrome Extension MV3</span>
+    <span class="tech-tag">Vanilla JavaScript</span>
+    <span class="tech-tag">OpenAI API</span>
+    <span class="tech-tag">Google Gemini API</span>
+    <span class="tech-tag">Google Translate API</span>
+    <span class="tech-tag">Youdao API</span>
+    <span class="tech-tag">AudioCapture API</span>
+    <span class="tech-tag">CSS3 Animations</span>
+  </div>
+</div>
+
+<!-- About -->
+<div class="container">
+  <h2 class="section-title">👨‍💻 About the Builder</h2>
+  <p style="font-size:1.1em; color:#ccc;">
+    Built independently by <strong>Yang Bowen</strong> — a deep AI power user who combines
+    hands-on coding skills with a passion for building practical tools.
+    Proficient with Claude, Codex, and other AI tools to accelerate development.
+    Fluent English communicator who thrives in collaborative, innovation-driven environments.
+  </p>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+  <h2>🚀 Want to try it?</h2>
+  <p>Install the extension and supercharge your YouTube learning experience. Available as an open-source Chrome extension.</p>
+  <a href="https://github.com/bowenyang/youtube-translate-sidebar" target="_blank">View on GitHub →</a>
+  <p style="margin-top:20px; font-size:0.85em; color:rgba(255,255,255,0.7);">
+    Or contact me: 3119336137@qq.com · +86 19521076985
+  </p>
+</div>
+
+<footer>
+  Built with ❤️ by <a href="mailto:3119336137@qq.com">Yang Bowen</a> · 2026
+</footer>
+
+</body>
+</html>
